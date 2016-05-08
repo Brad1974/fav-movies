@@ -3,17 +3,27 @@
     <div id="error_explanation">
       <h2>There were some errors:</h2>
       <ul>
-        <% binding.pry %>
         <% @movie.errors.full_messages.each do |message| %>
+
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 <form method="POST" action="/movies">
-  Movie Title <input type="text" name="title"></br>
-  Director <input type="text" name="director_name"></br>
-  Year <input type="text" name="year"></br>
+
+  <div class="field_with_errors">
+    Movie Title (required) <input type="text" name="title", value= <%= @movie.title %>></br>
+  </div>
+
+  <div class="field_with_errors">
+    Year (required) <input type="text" name="year", value= <%= @movie.year %>> </br>
+  </div>
+
+  <div class="field_with_errors">
+    Director (optional) <input type="text" name="director_name", value= <%= @movie.director.name %> ></br>
+  </div>
+
   <input type="submit" value="submit"></br></br>
 
 </form>

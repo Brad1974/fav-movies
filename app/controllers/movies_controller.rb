@@ -9,6 +9,8 @@ class MoviesController < ApplicationController
   get '/movies/new' do
     @user = User.first
     @movie = @user.movies.build(params)
+    @director = @movie.build_director
+
     erb :new
   end
 
