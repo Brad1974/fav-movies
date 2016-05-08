@@ -1,1 +1,4 @@
-<h1> hello daniel <h2>
+<ul>
+<% @movies.each do |m| %>
+  <li><a href = "/movies/<%= m.id %>"><%= m.title %></li>
+<% end %>

@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
   get '/movies/new' do
     @user = User.first
     @movie = @user.movies.build(params)
-    @director = @movie.build_director
+    @director = @movie.build_director(params)
 
     erb :new
   end
@@ -17,6 +17,8 @@ class MoviesController < ApplicationController
   post '/movies' do
     @user = User.first
     @movie = @user.movies.build(params)
+
+
     if @movie.save
       redirect to '/movies'
     else

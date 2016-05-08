@@ -1,5 +1,6 @@
 
 <% if @movie.errors.any? %>
+
     <div id="error_explanation">
       <h2>There were some errors:</h2>
       <ul>
@@ -7,22 +8,27 @@
 
           <li><%= message %></li>
         <% end %>
+      <% if @movie.director.errors.any? %>
+        <% @movie.director.errors.full_messages.each do |message| %>
+          <li>Director <%= message %></li>
+        <% end %>
       </ul>
+      <% end %>
     </div>
   <% end %>
 <form method="POST" action="/movies">
 
-  <div class="field_with_errors">
-    Movie Title (required) <input type="text" name="title", value= <%= @movie.title %>></br>
-  </div>
 
-  <div class="field_with_errors">
-    Year (required) <input type="text" name="year", value= <%= @movie.year %>> </br>
-  </div>
+    Movie Title</br>  <input type="text" name="title", value= <%= @movie.title %>></br>
 
-  <div class="field_with_errors">
-    Director (optional) <input type="text" name="director_name", value= <%= @movie.director.name %> ></br>
-  </div>
+
+
+    Year</br> <input type="text" name="year", value= <%= @movie.year %>> </br>
+
+
+
+    Director</br> <input type="text" name="director_name", value= <%= @movie.director.name %> ></br></br>
+
 
   <input type="submit" value="submit"></br></br>
 
