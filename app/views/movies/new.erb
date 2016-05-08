@@ -1,0 +1,19 @@
+
+<% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% binding.pry %>
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<form method="POST" action="/movies">
+  Movie Title <input type="text" name="title"></br>
+  Director <input type="text" name="director_name"></br>
+  Year <input type="text" name="year"></br>
+  <input type="submit" value="submit"></br></br>
+
+</form>
