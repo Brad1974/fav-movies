@@ -1,9 +1,17 @@
-<h1> Movie Index </h1><ul>
+<h1 style="text-align: center"> Movie Index </h1><ul>
 <% if @movies.count > 0 %>
 <% @movies.each do |m| %>
-  <li><a href = "/movies/<%= m.id %>"><%= m.title %><a href = "/movies/<%= m.id %>/edit">edit <%= m.title %></li><
-    <form method="post" action="/movies/<%=m.id%>/delete">
-  <input type="submit" value="Delete Movie"></li>
+  <p><a href = "/movies/<%= m.id %>"><%= m.title %></p>
+
+<p style="display:inline;"><form action="/movies/<%= m.id %>/edit">
+        <input type="submit" value="Edit">
+    </form>
+
+
+
+    <p style="display:inline;"><form method="post" action="/movies/<%=m.id%>/delete">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Movie"></p>
 </form>
 <% end %>
 <% else %>

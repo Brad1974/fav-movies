@@ -42,13 +42,12 @@ class MoviesController < ApplicationController
   end
 
   post '/movies/:id' do
-    binding.pry
     @movie = Movie.find_by_id(params[:id])
     @movie.update(params[:movie])
     redirect '/movies'
   end
 
-  post '/movies/:id/delete' do
+  delete '/movies/:id/delete' do
     movie = Movie.find(params[:id])
     movie.destroy
     redirect '/movies'
