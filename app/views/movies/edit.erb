@@ -1,4 +1,3 @@
-
 <% if @movie.errors.any? %>
 
     <div id="error_explanation">
@@ -16,18 +15,18 @@
       <% end %>
     </div>
   <% end %>
-<form method="POST" action="/movies">
+<form method="POST" action="/movies/<%=@movie.id%>">
 
 
-    Movie Title</br>  <input type="text" name= "movie[title]", value= <%= @movie.title %>></br>
-
-
-
-    Year</br> <input type="text" name="movie[year]", value= <%= @movie.year %>> </br>
+  Movie Title</br>  <input type="text" name= "movie[title]", value= <%= @movie.title %>></br>
 
 
 
-    Director</br> <input type="text" name="movie[director_name]", value= <%= @movie.director.name %> ></br></br>
+  Year</br> <input type="text" name="movie[year]", value= <%= @movie.year %>> </br>
+
+
+
+  Director</br> <input type="text" name="movie[director_name]", value= <%= @movie.director.name %> ></br></br>
 
 
   <input type="submit" value="submit"></br></br>

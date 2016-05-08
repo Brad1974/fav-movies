@@ -1,4 +1,11 @@
-<ul>
+<h1> Movie Index </h1><ul>
+<% if @movies.count > 0 %>
 <% @movies.each do |m| %>
-  <li><a href = "/movies/<%= m.id %>"><%= m.title %></li>
+  <li><a href = "/movies/<%= m.id %>"><%= m.title %><a href = "/movies/<%= m.id %>/edit">edit <%= m.title %></li><
+    <form method="post" action="/movies/<%=m.id%>/delete">
+  <input type="submit" value="Delete Movie"></li>
+</form>
+<% end %>
+<% else %>
+<p>There are no movies yet</p>
 <% end %>

@@ -5,6 +5,10 @@ class MoviesController < ApplicationController
     set :views, 'app/views/movies'
   end
 
+  get '/movies' do
+    @movies = Movie.all
+    erb :index
+  end
 
   get '/movies/new' do
     @user = User.first
@@ -16,8 +20,7 @@ class MoviesController < ApplicationController
 
   post '/movies' do
     @user = User.first
-    @movie = @user.movies.build(params)
-
+    @movie = @user.movies.build(params[:movie])
 
     if @movie.save
       redirect to '/movies'
@@ -26,10 +29,7 @@ class MoviesController < ApplicationController
     end
   end
 
-  get '/movies' do
-    @movies = Movie.all
-    erb :index
-  end
+
 
   get '/movies/:id' do
     @movie = Movie.find(params[:id])
@@ -41,15 +41,14 @@ class MoviesController < ApplicationController
     erb :edit
   end
 
-  patch '/movies/:id' do
-    @movie = Movie.find(params[:id])
-    @movie.name = params[:name]
-    @movie.content = params[:content]
-    @movie.save
-    erb :index
+  post '/movies/:id' do
+    binding.pry
+    @movie = Movie.find_by_id(params[:id])
+    @movie.update(params[:movie])
+    redirect '/movies'
   end
 
-  delete '/movies/:id/delete' do
+  post '/movies/:id/delete' do
     movie = Movie.find(params[:id])
     movie.destroy
     redirect '/movies'
