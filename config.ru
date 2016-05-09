@@ -10,3 +10,4 @@ use Rack::MethodOverride
 
 run ApplicationController
 use MoviesController
+use UsersController

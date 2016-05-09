@@ -1,0 +1,20 @@
+<h1>Register a new user </h1>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+  <h2>There were some errors:</h2>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form method="POST" action="/users">
+
+    User Name</br>  <input type="text" name= "user[name]", value= <%= @user.name %>></br>
+    User Email</br>  <input type="text" name= "user[email]", value= <%= @user.email %>></br>
+
+  <input type="submit" value="submit"></br></br>
+
+</form>

@@ -16,7 +16,7 @@
     </div>
   <% end %>
 <form method="POST" action="/movies/<%=@movie.id%>">
-
+<% binding.pry %>
 
   Movie Title</br>  <input type="text" name= "movie[title]", value= <%= @movie.title %>></br>
 
