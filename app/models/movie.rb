@@ -1,6 +1,6 @@
 class Movie < ActiveRecord::Base
 
-  validates :title, presence: true
+  validates :title, presence: { message: "Movie title can't be left blank"}
   validates :title, uniqueness: { message: "This movie appears to be already in the database"}
   validates :director, presence: { message: "You must enter a director for the movie"}
   validates :year, presence: { message: "You must enter a release year for the movie"}

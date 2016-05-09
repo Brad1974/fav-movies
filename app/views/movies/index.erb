@@ -13,5 +13,7 @@
   <p>There are no movies yet</p>
 <% end %></br></br>
 
-<p><a href = "/movies/new">Create a new movie</a></p>
+<% if logged_in? %>
+  <p><a href = "/movies/new">Create a new movie</a></p>
+<% end %>
 </div>

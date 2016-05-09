@@ -3,8 +3,6 @@ class MoviesController < ApplicationController
   configure do
     set :public_folder, 'public'
     set :views, 'app/views/movies'
-    enable :sessions
-    set :session_secret, "secret"
   end
 
   get '/' do
@@ -47,8 +45,7 @@ class MoviesController < ApplicationController
   get '/movies/:id/edit' do
     @movie = Movie.find(params[:id])
     @user = @movie.user
-    #binding.pry
-    if logged_in? && (session[:user_id] == @movie.user.id)
+    if logged_in? && current_user == @movie.user
       erb :edit
     else
       erb :show, locals: {message: "Only the authors of movie appreciation pages may edit them. If you are the author of this page, then log into your account."}
@@ -67,23 +64,11 @@ class MoviesController < ApplicationController
   delete '/movies/:id/delete' do
     @movie = Movie.find(params[:id])
     @user = @movie.user
-    if @user.id == session[:user_id]
+    if logged_in? && current_user == @movie.user
       @movie.destroy
       redirect '/movies'
     else
       erb :show, locals: {message: "Only the author of a movie appreciation page may delete it. If you are the author of this page, then log into your account."}
-    end
-  end
-
-  helpers do
-
-
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      User.find(session[:user_id])
     end
   end
 

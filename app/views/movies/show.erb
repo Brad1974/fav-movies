@@ -9,13 +9,14 @@
 <h3>A Quick Thought From <%= @user.name %> About <%=@movie.title %>:</h3>
 <p> <%=@movie.thoughts %></p>
 
-<form action="/movies/<%= @movie.id %>/edit">
-  <input type="submit" value="Edit">
-</form>
+<% if logged_in? && current_user == @movie.user %>
+  <form action="/movies/<%= @movie.id %>/edit">
+    <input type="submit" value="Edit">
+  </form>
 
-<form method="post" action="/movies/<%=@movie.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Movie">
-</form>
-
+  <form method="post" action="/movies/<%=@movie.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Movie">
+  </form>
+<% end %>
 <p><a href = "/movies">Return to Movie Index</a></p>
