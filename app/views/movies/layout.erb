@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+
+  <body>
+    <div style="text-align: center"><h1> Movie Picks Website </h1>
+      <% if logged_in? %>
+      <p>Currently logged in as <%= User.find_by(id: session[:user_id]).name %></p>
+      <a href = "/logout">Click here to log out</a>
+      <% else %>
+      <a href = "/login">Click here to log in</a>
+      <a href = "/signup">Or here to sign up</a>
+      <%end%>
+    </div>
+    </br></br>
+    <%= yield %>
+  </body>
+</html>

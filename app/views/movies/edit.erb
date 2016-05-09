@@ -15,10 +15,11 @@
       <% end %>
     </div>
   <% end %>
-<form method="POST" action="/movies/<%=@movie.id%>">
+<form method="POST" action="/movies/<%=@movie.id%>" id="movieform">
   Movie Title</br>  <input type="text" name= "movie[title]", value= "<%= @movie.title %>"></br>
   Year</br> <input type="text" name="movie[year]", value= "<%= @movie.year %>"> </br>
   Director</br> <input type="text" name="movie[director_name]", value= "<%= @movie.director.name %>"></br></br>
-  <input type="submit" value="submit"></br></br>
+  A Quick Thought about this film</br> <input type="text" name="movie[thoughts]", value= "<%= @movie.thoughts %>"></br></br>
 
+<input type="submit" value="submit"></br></br>
 </form>

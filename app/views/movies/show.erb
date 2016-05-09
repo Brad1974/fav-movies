@@ -1,13 +1,21 @@
-<h1><%= @movie.title %></h1>
+<div style="text-align: center">
+<h3><%= @user.name %>'s Appreciation Page For</h4><h1> <%= @movie.title %></h1>
+</div>
 <% unless locals.empty? %>
 <%= message %>
 <% end %>
-<p><%= @movie.director.name if @movie.director != nil %><p>
-  <p style="display:inline;"><form action="/movies/<%= @movie.id %>/edit">
-          <input type="submit" value="Edit">
-      </form>
+<h3>Directed by: <%= @movie.director.name if @movie.director != nil %><h3>
+<h3>Year of Release: <%= @movie.year %></h3>
+<h3>A Quick Thought From <%= @user.name %> About <%=@movie.title %>:</h3>
+<p> <%=@movie.thoughts %></p>
 
-          <p style="display:inline;"><form method="post" action="/movies/<%=@movie.id%>/delete">
-              <input id="hidden" type="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete Movie"></p>
-  <p><a href = "/movies">Return to Movie Index</a></p>
+<form action="/movies/<%= @movie.id %>/edit">
+  <input type="submit" value="Edit">
+</form>
+
+<form method="post" action="/movies/<%=@movie.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Movie">
+</form>
+
+<p><a href = "/movies">Return to Movie Index</a></p>

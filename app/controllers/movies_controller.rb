@@ -36,11 +36,13 @@ class MoviesController < ApplicationController
 
   get '/movies/:id' do
     @movie = Movie.find(params[:id])
-    erb :show
+    @user = @movie.user
+    erb :show, :layout => :'./layout'
   end
 
   get '/movies/:id/edit' do
     @movie = Movie.find(params[:id])
+    @user = @movie.user
     #binding.pry
     if logged_in? && (session[:user_id] == @movie.user.id)
       erb :edit
@@ -51,8 +53,11 @@ class MoviesController < ApplicationController
 
   post '/movies/:id' do
     @movie = Movie.find_by_id(params[:id])
-    @movie.update(params[:movie])
-    redirect '/movies'
+    if @movie.update(params[:movie])
+      redirect '/movies'
+    else
+      erb :edit
+    end
   end
 
   delete '/movies/:id/delete' do
@@ -62,6 +67,7 @@ class MoviesController < ApplicationController
   end
 
   helpers do
+
 
     def logged_in?
       !!session[:user_id]

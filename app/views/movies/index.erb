@@ -1,17 +1,17 @@
-<h1 style="text-align: center"> Movie Index </h1><ul>
-
   <% unless locals.empty? %>
   <%= message %>
   <% end %>
 
 
-
+<div style="text-align:center">
+  <h2> Movie Index </h2>
 <% if @movies != nil && @movies.count > 0 %>
   <% @movies.each do |m| %>
     <p><a href = "/movies/<%= m.id %>"><%= m.title %></p>
   <% end %>
 <% else %>
   <p>There are no movies yet</p>
-<% end %>
+<% end %></br></br>
 
 <p><a href = "/movies/new">Create a new movie</a></p>
+</div>
