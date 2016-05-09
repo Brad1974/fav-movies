@@ -3,6 +3,8 @@ class MoviesController < ApplicationController
   configure do
     set :public_folder, 'public'
     set :views, 'app/views/movies'
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   get '/movies' do
@@ -11,25 +13,26 @@ class MoviesController < ApplicationController
   end
 
   get '/movies/new' do
-    @user = User.first
-    @movie = @user.movies.build(params)
-    @director = @movie.build_director(params)
-
-    erb :new
+    @movies = Movie.all
+    if !session[:user_id]
+      erb :index, locals: {message: "You must have an account and be logged in to create a new movie page."}
+    else
+      @user = current_user
+      @movie = @user.movies.build(params)
+      @director = @movie.build_director(params)
+      erb :new
+    end
   end
 
   post '/movies' do
-    @user = User.first
+    @user = current_user
     @movie = @user.movies.build(params[:movie])
-
     if @movie.save
       redirect to '/movies'
     else
       erb :new
     end
   end
-
-
 
   get '/movies/:id' do
     @movie = Movie.find(params[:id])
@@ -38,7 +41,12 @@ class MoviesController < ApplicationController
 
   get '/movies/:id/edit' do
     @movie = Movie.find(params[:id])
-    erb :edit
+    #binding.pry
+    if logged_in? && (session[:user_id] == @movie.user.id)
+      erb :edit
+    else
+      erb :show, locals: {message: "Only the authors of movie appreciation pages may edit them. If you are the author of this page, then log into your account."}
+    end
   end
 
   post '/movies/:id' do
@@ -53,6 +61,15 @@ class MoviesController < ApplicationController
     redirect '/movies'
   end
 
+  helpers do
 
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
 
 end

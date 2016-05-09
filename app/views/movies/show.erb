@@ -1,4 +1,7 @@
 <h1><%= @movie.title %></h1>
+<% unless locals.empty? %>
+<%= message %>
+<% end %>
 <p><%= @movie.director.name if @movie.director != nil %><p>
   <p style="display:inline;"><form action="/movies/<%= @movie.id %>/edit">
           <input type="submit" value="Edit">

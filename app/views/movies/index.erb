@@ -1,17 +1,14 @@
 <h1 style="text-align: center"> Movie Index </h1><ul>
 
-<% if @movies.count > 0 %>
+  <% unless locals.empty? %>
+  <%= message %>
+  <% end %>
+
+
+
+<% if @movies != nil && @movies.count > 0 %>
   <% @movies.each do |m| %>
     <p><a href = "/movies/<%= m.id %>"><%= m.title %></p>
-
-    <p><form action="/movies/<%= m.id %>/edit">
-      <input type="submit" value="Edit">
-    </form></p>
-
-    <p><form method="post" action="/movies/<%=m.id%>/delete">
-      <input id="hidden" type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete Movie"></p>
-    </form>
   <% end %>
 <% else %>
   <p>There are no movies yet</p>

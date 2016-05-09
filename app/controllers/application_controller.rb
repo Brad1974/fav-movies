@@ -1,6 +1,9 @@
 class ApplicationController < Sinatra::Base
 
-  get '/movies' do
-  "hello"
+  configure do
+    enable :sessions
+    set :session_secret, "secret"
+    
   end
+
 end

@@ -15,3 +15,4 @@ gem "pry"
 gem "shotgun"
 gem "tux"
 gem "capybara"
+gem 'bcrypt'

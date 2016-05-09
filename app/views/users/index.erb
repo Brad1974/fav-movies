@@ -2,13 +2,4 @@
 
 <% @users.each do |u| %>
   <p><a href = "/users/<%= u.id %>"><%= u.name %></p>
-
-  <p><form action="/users/<%= u.id %>/edit">
-    <input type="submit" value="Edit">
-  </form></p>
-
-  <p><form method="post" action="/users/<%=u.id%>/delete">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete User"></p>
-  </form>
 <% end %>
