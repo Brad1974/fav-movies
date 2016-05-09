@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
   post '/signup' do
     if params[:user][:name] == "" || params[:user][:email] == "" || params[:user][:password] == ""
-      redirect to '/signup'
+      erb :signup, locals: {message: "You must complete all fields to sign up"}
     else
       @user = User.create(params[:user])
       session["user_id"] = @user.id

@@ -4,13 +4,14 @@
     <div id="error_explanation">
       <h2>There were some errors:</h2>
       <ul>
-        <% @movie.errors.full_messages.each do |message| %>
+        <% binding.pry %>
+        <% @movie.errors.each do |k, v| %>
 
-          <li><%= message %></li>
+          <li><%= v %></li>
         <% end %>
       <% if @movie.director.errors.any? %>
-        <% @movie.director.errors.full_messages.each do |message| %>
-          <li>Director <%= message %></li>
+        <% @movie.director.errors.each do |k, v| %>
+          <li>Director <%= v %></li>
         <% end %>
       </ul>
       <% end %>
@@ -18,10 +19,10 @@
   <% end %>
 <form method="POST" action="/movies">
 
-    Movie Title</br>  <input type="text" name= "movie[title]", value= <%= @movie.title %>></br>
+    Movie Title</br>  <input type="text" name= "movie[title]", value= "<%= @movie.title %>"></br>
     Year</br> <input type="text" name="movie[year]", value= <%= @movie.year %>> </br>
     Director</br> <input type="text" name="movie[director_name]", value= <%= @movie.director.name %> ></br></br>
-    A Quick Thought about this film</br> <input type="text" name="movie[thoughts]", value= "<%= @movie.thoughts %>"></br></br>
-  <input type="submit" value="submit"></br></br>
+    A Quick Thought about this film</br><textarea name="movie[thoughts]" style="width:50%; height: 70px;"> <%= @movie.thoughts %> </textarea><br/><br/>
+<input type="submit" value="submit"></br></br>
 
 </form>

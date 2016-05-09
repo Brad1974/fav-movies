@@ -7,6 +7,10 @@ class MoviesController < ApplicationController
     set :session_secret, "secret"
   end
 
+  get '/' do
+    redirect to '/movies'
+  end
+
   get '/movies' do
     @movies = Movie.all
     erb :index
@@ -61,9 +65,14 @@ class MoviesController < ApplicationController
   end
 
   delete '/movies/:id/delete' do
-    movie = Movie.find(params[:id])
-    movie.destroy
-    redirect '/movies'
+    @movie = Movie.find(params[:id])
+    @user = @movie.user
+    if @user.id == session[:user_id]
+      @movie.destroy
+      redirect '/movies'
+    else
+      erb :show, locals: {message: "Only the author of a movie appreciation page may delete it. If you are the author of this page, then log into your account."}
+    end
   end
 
   helpers do
